@@ -3,7 +3,11 @@ const fs = require("fs/promises");
 
 class Encrypt extends Transform {
   _transform(chunk, encoding, cb) {
-    console.log(chunk.toString("utf-8"));
+    for (let i = 0; i < chunk.length; i++) {
+      if (chunk[i] !== 255) {
+        chunk[i] = chunk[i] + 1;
+      }
+    }
     this.push(chunk);
   }
 }
